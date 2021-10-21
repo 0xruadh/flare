@@ -351,42 +351,39 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 	}
 
 	var (
-		ret                                       []byte
-		vmerr                                     error // vm errors do not affect consensus and are therefore not assigned to err
-		selectProveDataAvailabilityPeriodFinality bool
-		selectProvePaymentFinality                bool
-		selectDisprovePaymentFinality             bool
-		prioritisedFTSOContract                   bool
+		ret                      []byte
+		vmerr                    error // vm errors do not affect consensus and are therefore not assigned to err
+		selectSetPaymentFinality bool
+		prioritisedFTSOContract  bool
 	)
 
 	if st.evm.Context.Coinbase != common.HexToAddress("0x0100000000000000000000000000000000000000") {
 		return nil, fmt.Errorf("Invalid value for block.coinbase")
 	}
+	chainID := st.evm.ChainConfig().ChainID
 	if st.msg.From() == common.HexToAddress("0x0100000000000000000000000000000000000000") ||
-		st.msg.From() == common.HexToAddress(GetStateConnectorContractAddr(st.evm.Context.Time)) ||
+		st.msg.From() == common.HexToAddress(GetStateConnectorContractAddr(chainID, st.evm.Context.Time)) ||
 		st.msg.From() == common.HexToAddress(GetSystemTriggerContractAddr(st.evm.Context.Time)) {
 		return nil, fmt.Errorf("Invalid sender")
 	}
 	burnAddress := st.evm.Context.Coinbase
 	if !contractCreation {
-		if *msg.To() == common.HexToAddress(GetStateConnectorContractAddr(st.evm.Context.Time)) && len(st.data) >= 4 {
-			selectProveDataAvailabilityPeriodFinality = bytes.Equal(st.data[0:4], GetProveDataAvailabilityPeriodFinalitySelector(st.evm.Context.Time))
-			selectProvePaymentFinality = bytes.Equal(st.data[0:4], GetProvePaymentFinalitySelector(st.evm.Context.Time))
-			selectDisprovePaymentFinality = bytes.Equal(st.data[0:4], GetDisprovePaymentFinalitySelector(st.evm.Context.Time))
+		if *msg.To() == common.HexToAddress(GetStateConnectorContractAddr(chainID, st.evm.Context.Time)) && len(st.data) >= 4 {
+			selectSetPaymentFinality = bytes.Equal(st.data[0:4], SetPaymentFinalitySelector(chainID, st.evm.Context.Time))
 		} else {
 			prioritisedFTSOContract = *msg.To() == common.HexToAddress(GetPrioritisedFTSOContract(st.evm.Context.Time))
 		}
 	}
 
-	if selectProveDataAvailabilityPeriodFinality || selectProvePaymentFinality || selectDisprovePaymentFinality {
+	if selectSetPaymentFinality {
 		// Increment the nonce for the next transaction
 		st.state.SetNonce(msg.From(), st.state.GetNonce(sender.Address())+1)
-		stateConnectorGas := st.gas / GetStateConnectorGasDivisor(st.evm.Context.Time)
+		stateConnectorGas := st.gas / GetStateConnectorGasDivisor(chainID, st.evm.Context.Time)
 		checkRet, _, checkVmerr := st.evm.Call(sender, st.to(), st.data, stateConnectorGas, st.value)
 		if checkVmerr == nil {
-			chainConfig := st.evm.ChainConfig()
-			if GetStateConnectorActivated(chainConfig.ChainID, st.evm.Context.Time) && binary.BigEndian.Uint32(checkRet[28:32]) < GetMaxAllowedChains(st.evm.Context.Time) {
-				if StateConnectorCall(msg.From(), st.evm.Context.Time, st.data[0:4], checkRet) {
+			if GetStateConnectorActivated(chainID, st.evm.Context.Time) && binary.BigEndian.Uint64(checkRet[8:16]) < GetMaxAllowedChains(chainID, st.evm.Context.Time) {
+				// checkRet, _, checkVmerr := st.evm.Call(sender, st.to(), st.data, stateConnectorGas, st.value)
+				if StateConnectorCall(st.evm.Context.Time, checkRet, uint64(63880001)) {
 					originalCoinbase := st.evm.Context.Coinbase
 					defer func() {
 						st.evm.Context.Coinbase = originalCoinbase

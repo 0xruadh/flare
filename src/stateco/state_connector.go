@@ -24,9 +24,12 @@ import (
 )
 
 var (
-	testingChainID               = new(big.Int).SetUint64(16)
-	stateConnectorActivationTime = new(big.Int).SetUint64(1636070400)
-	tr                           = &http.Transport{
+	flareChainID                  = new(big.Int).SetUint64(14) // https://github.com/ethereum-lists/chains/blob/master/_data/chains/eip155-14.json
+	songbirdChainID               = new(big.Int).SetUint64(19) // https://github.com/ethereum-lists/chains/blob/master/_data/chains/eip155-19.json
+	costonChainID                 = new(big.Int).SetUint64(16) // https://github.com/ethereum-lists/chains/blob/master/_data/chains/eip155-16.json
+	stateConnectorActivationTime  = new(big.Int).SetUint64(1636070400)
+	stateConnectorFinalUpdateTime = new(big.Int).SetUint64(1635984000)
+	tr                            = &http.Transport{
 		MaxIdleConns:        100,
 		MaxConnsPerHost:     100,
 		MaxIdleConnsPerHost: 100,
@@ -43,48 +46,41 @@ var (
 
 func GetStateConnectorActivated(chainID *big.Int, blockTime *big.Int) bool {
 	// Return true if chainID is 16 or if block.timestamp is greater than the state connector activation time on any chain
-	return chainID.Cmp(testingChainID) == 0 || blockTime.Cmp(stateConnectorActivationTime) > 0
+	return chainID.Cmp(costonChainID) == 0 || blockTime.Cmp(stateConnectorActivationTime) > 0
 }
 
-func GetStateConnectorGasDivisor(blockTime *big.Int) uint64 {
+func GetStateConnectorGasDivisor(chainID *big.Int, blockTime *big.Int) uint64 {
 	switch {
 	default:
 		return 3
 	}
 }
 
-func GetMaxAllowedChains(blockTime *big.Int) uint32 {
+func GetMaxAllowedChains(chainID *big.Int, blockTime *big.Int) uint64 {
 	switch {
 	default:
 		return 5
 	}
 }
 
-func GetStateConnectorContractAddr(blockTime *big.Int) string {
+func GetStateConnectorContractAddr(chainID *big.Int, blockTime *big.Int) string {
 	switch {
+	case chainID.Cmp(songbirdChainID) == 0:
+		switch {
+		case blockTime.Cmp(stateConnectorFinalUpdateTime) < 0:
+			return "0x1000000000000000000000000000000000000001"
+		default:
+			return "0x1000000000000000000000000000000000000001"
+		}
 	default:
 		return "0x1000000000000000000000000000000000000001"
 	}
 }
 
-func GetProveDataAvailabilityPeriodFinalitySelector(blockTime *big.Int) []byte {
+func SetPaymentFinalitySelector(chainID *big.Int, blockTime *big.Int) []byte {
 	switch {
 	default:
-		return []byte{0xc5, 0xd6, 0x4c, 0xd1}
-	}
-}
-
-func GetProvePaymentFinalitySelector(blockTime *big.Int) []byte {
-	switch {
-	default:
-		return []byte{0x38, 0x84, 0x92, 0xdd}
-	}
-}
-
-func GetDisprovePaymentFinalitySelector(blockTime *big.Int) []byte {
-	switch {
-	default:
-		return []byte{0x7f, 0x58, 0x24, 0x32}
+		return []byte{0xb3, 0x8f, 0x3d, 0x3e}
 	}
 }
 
@@ -96,57 +92,13 @@ type GetPoWRequestPayload struct {
 	Method string   `json:"method"`
 	Params []string `json:"params"`
 }
-type GetPoWBlockCountResp struct {
-	Result uint64      `json:"result"`
-	Error  interface{} `json:"error"`
-}
-
-func GetPoWBlockCount(chainURL string, username string, password string) (uint64, bool) {
-	data := GetPoWRequestPayload{
-		Method: "getblockcount",
-		Params: []string{},
-	}
-	payloadBytes, err := json.Marshal(data)
-	if err != nil {
-		return 0, true
-	}
-	body := bytes.NewReader(payloadBytes)
-	req, err := http.NewRequest("POST", chainURL, body)
-	if err != nil {
-		return 0, true
-	}
-	req.Header.Set("Content-Type", "application/json")
-	if username != "" && password != "" {
-		req.SetBasicAuth(username, password)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		return 0, true
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return 0, true
-	}
-	respBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return 0, true
-	}
-	var jsonResp GetPoWBlockCountResp
-	err = json.Unmarshal(respBody, &jsonResp)
-	if err != nil {
-		return 0, true
-	}
-	if jsonResp.Error != nil {
-		return 0, true
-	}
-	return jsonResp.Result, false
-}
 
 type GetPoWBlockHeaderResult struct {
 	Hash          string `json:"hash"`
 	Confirmations uint64 `json:"confirmations"`
 	Height        uint64 `json:"height"`
 }
+
 type GetPoWBlockHeaderResp struct {
 	Result GetPoWBlockHeaderResult `json:"result"`
 	Error  interface{}             `json:"error"`
@@ -197,34 +149,16 @@ func GetPoWBlockHeader(ledgerHash string, requiredConfirmations uint64, chainURL
 	return jsonResp.Result.Height, false
 }
 
-func ProveDataAvailabilityPeriodFinalityPoW(checkRet []byte, chainURL string, username string, password string) (bool, bool) {
-	blockCount, err := GetPoWBlockCount(chainURL, username, password)
-	if err {
-		return false, true
-	}
-	ledger := binary.BigEndian.Uint64(checkRet[56:64])
-	requiredConfirmations := binary.BigEndian.Uint64(checkRet[88:96])
-	if blockCount < ledger+requiredConfirmations {
-		return false, true
-	}
-	ledgerResp, err := GetPoWBlockHeader(hex.EncodeToString(checkRet[96:128]), requiredConfirmations, chainURL, username, password)
-	if err {
-		return false, true
-	} else if ledgerResp > 0 && ledgerResp == ledger {
-		return true, false
-	} else {
-		return false, false
-	}
-}
-
 type GetPoWTxRequestParams struct {
 	TxID    string `json:"txid"`
 	Verbose bool   `json:"verbose"`
 }
+
 type GetPoWTxRequestPayload struct {
 	Method string                `json:"method"`
 	Params GetPoWTxRequestParams `json:"params"`
 }
+
 type GetPoWTxResult struct {
 	TxID          string `json:"txid"`
 	BlockHash     string `json:"blockhash"`
@@ -238,16 +172,18 @@ type GetPoWTxResult struct {
 		} `json:"scriptPubKey"`
 	} `json:"vout"`
 }
+
 type GetPoWTxResp struct {
 	Result GetPoWTxResult `json:"result"`
 	Error  interface{}    `json:"error"`
 }
 
-func GetPoWTx(txHash string, voutN uint64, latestAvailableBlock uint64, currencyCode string, chainURL string, username string, password string) ([]byte, uint64, bool) {
+func GetPoWTx(instructions Instructions, basicAuth BasicAuth) ([]byte, uint64, bool) {
+	voutN := instructions.Utxo
 	data := GetPoWTxRequestPayload{
 		Method: "getrawtransaction",
 		Params: GetPoWTxRequestParams{
-			TxID:    txHash[1:],
+			TxID:    hex.EncodeToString(instructions.TxId),
 			Verbose: true,
 		},
 	}
@@ -256,13 +192,13 @@ func GetPoWTx(txHash string, voutN uint64, latestAvailableBlock uint64, currency
 		return []byte{}, 0, true
 	}
 	body := bytes.NewReader(payloadBytes)
-	req, err := http.NewRequest("POST", chainURL, body)
+	req, err := http.NewRequest("POST", basicAuth.ChainURL, body)
 	if err != nil {
 		return []byte{}, 0, true
 	}
 	req.Header.Set("Content-Type", "application/json")
-	if username != "" && password != "" {
-		req.SetBasicAuth(username, password)
+	if basicAuth.Username != "" && basicAuth.Password != "" {
+		req.SetBasicAuth(basicAuth.Username, basicAuth.Password)
 	}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -284,73 +220,33 @@ func GetPoWTx(txHash string, voutN uint64, latestAvailableBlock uint64, currency
 	if jsonResp.Error != nil {
 		return []byte{}, 0, true
 	}
-	if uint64(len(jsonResp.Result.Vout)) <= voutN {
+	if uint64(len(jsonResp.Result.Vout)) <= uint64(voutN) {
 		return []byte{}, 0, false
 	}
 	if jsonResp.Result.Vout[voutN].ScriptPubKey.Type != "pubkeyhash" || len(jsonResp.Result.Vout[voutN].ScriptPubKey.Addresses) != 1 {
 		return []byte{}, 0, false
 	}
-	inBlock, getBlockErr := GetPoWBlockHeader(jsonResp.Result.BlockHash, jsonResp.Result.Confirmations, chainURL, username, password)
+	inBlock, getBlockErr := GetPoWBlockHeader(jsonResp.Result.BlockHash, jsonResp.Result.Confirmations, basicAuth.ChainURL, basicAuth.Username, basicAuth.Password)
 	if getBlockErr {
 		return []byte{}, 0, true
 	}
-	if inBlock == 0 || inBlock >= latestAvailableBlock {
+	if inBlock == 0 || inBlock >= instructions.AvailableLedger {
 		return []byte{}, 0, false
 	}
-	txIdHash := crypto.Keccak256([]byte(txHash))
+	salt := crypto.Keccak256([]byte("FlareStateConnector_PAYMENTHASH"))
 	destinationHash := crypto.Keccak256([]byte(jsonResp.Result.Vout[voutN].ScriptPubKey.Addresses[0]))
+	dataHash := crypto.Keccak256(common.LeftPadBytes(common.FromHex(hexutil.EncodeUint64(instructions.ChainId)), 32))
 	amountHash := crypto.Keccak256(common.LeftPadBytes(common.FromHex(hexutil.EncodeUint64(uint64(jsonResp.Result.Vout[voutN].Value*math.Pow(10, 8)))), 32))
-	currencyHash := crypto.Keccak256([]byte(currencyCode))
-	return crypto.Keccak256(txIdHash, destinationHash, amountHash, currencyHash), inBlock, false
+	return crypto.Keccak256(salt, destinationHash, dataHash, amountHash), inBlock, false
 }
 
-func ProvePaymentFinalityPoW(checkRet []byte, isDisprove bool, currencyCode string, chainURL string, username string, password string) (bool, bool) {
-	if len(checkRet) < 257 {
-		return false, false
-	}
-	voutN, err := strconv.ParseUint(string(checkRet[192:193]), 16, 64)
-	if err != nil {
-		return false, false
-	}
-	paymentHash, inBlock, getPoWTxErr := GetPoWTx(string(checkRet[192:257]), voutN, binary.BigEndian.Uint64(checkRet[88:96]), currencyCode, chainURL, username, password)
+func ProvePaymentPOW(instructions Instructions, basicAuth BasicAuth) (bool, bool) {
+	paymentHash, inBlock, getPoWTxErr := GetPoWTx(instructions, basicAuth)
 	if getPoWTxErr {
 		return false, true
 	}
-	if !isDisprove {
-		if len(paymentHash) > 0 && bytes.Equal(paymentHash, checkRet[96:128]) && inBlock == binary.BigEndian.Uint64(checkRet[56:64]) {
-			return true, false
-		}
-	} else {
-		if len(paymentHash) > 0 && bytes.Equal(paymentHash, checkRet[96:128]) && inBlock > binary.BigEndian.Uint64(checkRet[56:64]) {
-			return true, false
-		} else if len(paymentHash) == 0 {
-			return true, false
-		}
-	}
-	return false, false
-}
-
-func ProvePoW(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte, currencyCode string, chainURL string) (bool, bool) {
-	var username, password string
-	chainURLhash := sha256.Sum256([]byte(chainURL))
-	chainURLchecksum := hex.EncodeToString(chainURLhash[0:4])
-	switch currencyCode {
-	case "btc":
-		username = os.Getenv("BTC_U_" + chainURLchecksum)
-		password = os.Getenv("BTC_P_" + chainURLchecksum)
-	case "ltc":
-		username = os.Getenv("LTC_U_" + chainURLchecksum)
-		password = os.Getenv("LTC_P_" + chainURLchecksum)
-	case "dog":
-		username = os.Getenv("DOGE_U_" + chainURLchecksum)
-		password = os.Getenv("DOGE_P_" + chainURLchecksum)
-	}
-	if bytes.Equal(functionSelector, GetProveDataAvailabilityPeriodFinalitySelector(blockTime)) {
-		return ProveDataAvailabilityPeriodFinalityPoW(checkRet, chainURL, username, password)
-	} else if bytes.Equal(functionSelector, GetProvePaymentFinalitySelector(blockTime)) {
-		return ProvePaymentFinalityPoW(checkRet, false, currencyCode, chainURL, username, password)
-	} else if bytes.Equal(functionSelector, GetDisprovePaymentFinalitySelector(blockTime)) {
-		return ProvePaymentFinalityPoW(checkRet, true, currencyCode, chainURL, username, password)
+	if len(paymentHash) > 0 && bytes.Equal(paymentHash, instructions.PaymentHash) && inBlock == instructions.Ledger {
+		return true, false
 	}
 	return false, false
 }
@@ -359,102 +255,20 @@ func ProvePoW(sender common.Address, blockTime *big.Int, functionSelector []byte
 // XRP
 // =======================================================
 
-type GetXRPBlockRequestParams struct {
-	LedgerIndex  uint64 `json:"ledger_index"`
-	Full         bool   `json:"full"`
-	Accounts     bool   `json:"accounts"`
-	Transactions bool   `json:"transactions"`
-	Expand       bool   `json:"expand"`
-	OwnerFunds   bool   `json:"owner_funds"`
-}
-type GetXRPBlockRequestPayload struct {
-	Method string                     `json:"method"`
-	Params []GetXRPBlockRequestParams `json:"params"`
-}
 type CheckXRPErrorResponse struct {
 	Error string `json:"error"`
-}
-type GetXRPBlockResponse struct {
-	LedgerHash  string `json:"ledger_hash"`
-	LedgerIndex int    `json:"ledger_index"`
-	Validated   bool   `json:"validated"`
-}
-
-func GetXRPBlock(ledger uint64, chainURL string) (string, bool) {
-	data := GetXRPBlockRequestPayload{
-		Method: "ledger",
-		Params: []GetXRPBlockRequestParams{
-			GetXRPBlockRequestParams{
-				LedgerIndex:  ledger,
-				Full:         false,
-				Accounts:     false,
-				Transactions: false,
-				Expand:       false,
-				OwnerFunds:   false,
-			},
-		},
-	}
-	payloadBytes, err := json.Marshal(data)
-	if err != nil {
-		return "", true
-	}
-	body := bytes.NewReader(payloadBytes)
-	req, err := http.NewRequest("POST", chainURL, body)
-	if err != nil {
-		return "", true
-	}
-	req.Header.Set("Content-Type", "application/json")
-	resp, err := client.Do(req)
-	if err != nil {
-		return "", true
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != 200 {
-		return "", true
-	}
-	respBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return "", true
-	}
-	var checkErrorResp map[string]CheckXRPErrorResponse
-	err = json.Unmarshal(respBody, &checkErrorResp)
-	if err != nil {
-		return "", true
-	}
-	if checkErrorResp["result"].Error != "" {
-		return "", true
-	}
-	var jsonResp map[string]GetXRPBlockResponse
-	err = json.Unmarshal(respBody, &jsonResp)
-	if err != nil {
-		return "", true
-	}
-	if !jsonResp["result"].Validated {
-		return "", true
-	}
-	return jsonResp["result"].LedgerHash, false
-}
-
-func ProveDataAvailabilityPeriodFinalityXRP(checkRet []byte, chainURL string) (bool, bool) {
-	ledger := binary.BigEndian.Uint64(checkRet[56:64])
-	ledgerHashString, err := GetXRPBlock(ledger, chainURL)
-	if err {
-		return false, true
-	}
-	if ledgerHashString != "" && bytes.Equal(crypto.Keccak256([]byte(ledgerHashString)), checkRet[96:128]) {
-		return true, false
-	}
-	return false, false
 }
 
 type GetXRPTxRequestParams struct {
 	Transaction string `json:"transaction"`
 	Binary      bool   `json:"binary"`
 }
+
 type GetXRPTxRequestPayload struct {
 	Method string                  `json:"method"`
 	Params []GetXRPTxRequestParams `json:"params"`
 }
+
 type GetXRPTxResponse struct {
 	Destination     string `json:"Destination"`
 	DestinationTag  int    `json:"DestinationTag"`
@@ -474,12 +288,12 @@ type GetXRPTxIssuedCurrency struct {
 	Value    string `json:"value"`
 }
 
-func GetXRPTx(txHash string, latestAvailableLedger uint64, chainURL string) ([]byte, uint64, bool) {
+func GetXRPTx(instructions Instructions, basicAuth BasicAuth) ([]byte, uint64, bool) {
 	data := GetXRPTxRequestPayload{
 		Method: "tx",
 		Params: []GetXRPTxRequestParams{
 			GetXRPTxRequestParams{
-				Transaction: txHash,
+				Transaction: hex.EncodeToString(instructions.TxId),
 				Binary:      false,
 			},
 		},
@@ -489,7 +303,7 @@ func GetXRPTx(txHash string, latestAvailableLedger uint64, chainURL string) ([]b
 		return []byte{}, 0, true
 	}
 	body := bytes.NewReader(payloadBytes)
-	req, err := http.NewRequest("POST", chainURL, body)
+	req, err := http.NewRequest("POST", basicAuth.ChainURL, body)
 	if err != nil {
 		return []byte{}, 0, true
 	}
@@ -534,7 +348,7 @@ func GetXRPTx(txHash string, latestAvailableLedger uint64, chainURL string) ([]b
 		return []byte{}, 0, false
 	}
 	inLedger := uint64(jsonResp["result"].InLedger)
-	if inLedger == 0 || inLedger >= latestAvailableLedger || !jsonResp["result"].Validated {
+	if inLedger == 0 || inLedger >= instructions.AvailableLedger || !jsonResp["result"].Validated {
 		return []byte{}, 0, false
 	}
 	var currency string
@@ -562,41 +376,22 @@ func GetXRPTx(txHash string, latestAvailableLedger uint64, chainURL string) ([]b
 		amount = uint64(floatAmount * math.Pow(10, 15))
 		currency = issuedCurrencyResp.Currency + issuedCurrencyResp.Issuer
 	}
-	txIdHash := crypto.Keccak256([]byte(jsonResp["result"].Hash))
+	salt := crypto.Keccak256([]byte("FlareStateConnector_PAYMENTHASH"))
 	destinationHash := crypto.Keccak256([]byte(jsonResp["result"].Destination))
 	destinationTagHash := crypto.Keccak256(common.LeftPadBytes(common.FromHex(hexutil.EncodeUint64(uint64(jsonResp["result"].DestinationTag))), 32))
 	destinationHash = crypto.Keccak256(destinationHash, destinationTagHash)
 	amountHash := crypto.Keccak256(common.LeftPadBytes(common.FromHex(hexutil.EncodeUint64(uint64(amount))), 32))
-	currencyHash := crypto.Keccak256([]byte(currency))
-	return crypto.Keccak256(txIdHash, destinationHash, amountHash, currencyHash), inLedger, false
+	dataHash := crypto.Keccak256([]byte(currency))
+	return crypto.Keccak256(salt, destinationHash, dataHash, amountHash), inLedger, false
 }
 
-func ProvePaymentFinalityXRP(checkRet []byte, isDisprove bool, chainURL string) (bool, bool) {
-	paymentHash, inLedger, err := GetXRPTx(string(checkRet[192:]), binary.BigEndian.Uint64(checkRet[88:96]), chainURL)
+func ProvePaymentXRP(instructions Instructions, basicAuth BasicAuth) (bool, bool) {
+	paymentHash, inLedger, err := GetXRPTx(instructions, basicAuth)
 	if err {
 		return false, true
 	}
-	if !isDisprove {
-		if len(paymentHash) > 0 && bytes.Equal(paymentHash, checkRet[96:128]) && inLedger == binary.BigEndian.Uint64(checkRet[56:64]) {
-			return true, false
-		}
-	} else {
-		if len(paymentHash) > 0 && bytes.Equal(paymentHash, checkRet[96:128]) && inLedger > binary.BigEndian.Uint64(checkRet[56:64]) {
-			return true, false
-		} else if len(paymentHash) == 0 {
-			return true, false
-		}
-	}
-	return false, false
-}
-
-func ProveXRP(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte, chainURL string) (bool, bool) {
-	if bytes.Equal(functionSelector, GetProveDataAvailabilityPeriodFinalitySelector(blockTime)) {
-		return ProveDataAvailabilityPeriodFinalityXRP(checkRet, chainURL)
-	} else if bytes.Equal(functionSelector, GetProvePaymentFinalitySelector(blockTime)) {
-		return ProvePaymentFinalityXRP(checkRet, false, chainURL)
-	} else if bytes.Equal(functionSelector, GetDisprovePaymentFinalitySelector(blockTime)) {
-		return ProvePaymentFinalityXRP(checkRet, true, chainURL)
+	if len(paymentHash) > 0 && bytes.Equal(paymentHash, instructions.PaymentHash) && inLedger == instructions.Ledger {
+		return true, false
 	}
 	return false, false
 }
@@ -605,7 +400,7 @@ func ProveXRP(sender common.Address, blockTime *big.Int, functionSelector []byte
 // ALGO
 // =======================================================
 
-func ProveALGO(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte, chainURL string) (bool, bool) {
+func ProvePaymentALGO(instructions Instructions, basicAuth BasicAuth) (bool, bool) {
 	return false, false
 }
 
@@ -613,76 +408,134 @@ func ProveALGO(sender common.Address, blockTime *big.Int, functionSelector []byt
 // Common
 // =======================================================
 
-func ProveChain(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte, chainId uint32, chainURL string) (bool, bool) {
+func ReadChain(instructions Instructions, basicAuth BasicAuth) (bool, bool) {
+	switch instructions.ChainId {
+	case 0, 1, 2:
+		return ProvePaymentPOW(instructions, basicAuth)
+	case 3:
+		return ProvePaymentXRP(instructions, basicAuth)
+	case 4:
+		return ProvePaymentALGO(instructions, basicAuth)
+	}
+	return false, false
+}
+
+func GetAPIs(chainId uint64) string {
 	switch chainId {
 	case 0:
-		return ProvePoW(sender, blockTime, functionSelector, checkRet, "btc", chainURL)
+		return os.Getenv("BTC_APIs")
 	case 1:
-		return ProvePoW(sender, blockTime, functionSelector, checkRet, "ltc", chainURL)
+		return os.Getenv("LTC_APIs")
 	case 2:
-		return ProvePoW(sender, blockTime, functionSelector, checkRet, "dog", chainURL)
+		return os.Getenv("DOGE_APIs")
 	case 3:
-		return ProveXRP(sender, blockTime, functionSelector, checkRet, chainURL)
+		return os.Getenv("XRP_APIs")
 	case 4:
-		return ProveALGO(sender, blockTime, functionSelector, checkRet, chainURL)
+		return os.Getenv("ALGO_APIs")
 	default:
-		return false, true
+		return ""
 	}
 }
 
-func ReadChain(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte) bool {
-	chainId := binary.BigEndian.Uint32(checkRet[28:32])
-	var chainURLs string
+type BasicAuth struct {
+	ChainURL string
+	Username string
+	Password string
+}
+
+func GetBasicAuth(chainId uint64, chainURL string) BasicAuth {
+	var username, password string
+	chainURLhash := sha256.Sum256([]byte(chainURL))
+	chainURLchecksum := hex.EncodeToString(chainURLhash[0:4])
 	switch chainId {
 	case 0:
-		chainURLs = os.Getenv("BTC_APIs")
+		username = os.Getenv("BTC_U_" + chainURLchecksum)
+		password = os.Getenv("BTC_P_" + chainURLchecksum)
 	case 1:
-		chainURLs = os.Getenv("LTC_APIs")
+		username = os.Getenv("LTC_U_" + chainURLchecksum)
+		password = os.Getenv("LTC_P_" + chainURLchecksum)
 	case 2:
-		chainURLs = os.Getenv("DOGE_APIs")
+		username = os.Getenv("DOGE_U_" + chainURLchecksum)
+		password = os.Getenv("DOGE_P_" + chainURLchecksum)
 	case 3:
-		chainURLs = os.Getenv("XRP_APIs")
 	case 4:
-		chainURLs = os.Getenv("ALGO_APIs")
+	default:
 	}
-	if chainURLs == "" {
+	return BasicAuth{
+		ChainURL: chainURL,
+		Username: username,
+		Password: password,
+	}
+}
+
+func ReadChainWithRetries(blockTime *big.Int, instructions Instructions) bool {
+	switch blockTime {
+	default:
+		chainURLs := GetAPIs(instructions.ChainId)
+		if chainURLs == "" {
+			return false
+		}
+		for i := 0; i < apiRetries; i++ {
+			for _, chainURL := range strings.Split(chainURLs, ",") {
+				if chainURL == "" {
+					continue
+				}
+				basicAuth := GetBasicAuth(instructions.ChainId, chainURL)
+				verified, err := ReadChain(instructions, basicAuth)
+				if !verified && err {
+					continue
+				}
+				return verified
+			}
+			time.Sleep(apiRetryDelay)
+		}
 		return false
 	}
-	for i := 0; i < apiRetries; i++ {
-		for _, chainURL := range strings.Split(chainURLs, ",") {
-			if chainURL == "" {
-				continue
-			}
-			verified, err := ProveChain(sender, blockTime, functionSelector, checkRet, chainId, chainURL)
-			if !verified && err {
-				continue
-			}
-			return verified
-		}
-		time.Sleep(apiRetryDelay)
-	}
-	return false
 }
 
-func GetVerificationPaths(functionSelector []byte, checkRet []byte) (string, string) {
+func GetVerificationPaths(checkRet []byte) (string, string) {
 	prefix := "cache/"
 	acceptedPrefix := "ACCEPTED"
 	rejectedPrefix := "REJECTED"
-	functionHash := hex.EncodeToString(functionSelector[:])
-	verificationHash := hex.EncodeToString(crypto.Keccak256(checkRet[0:64], checkRet[96:128]))
-	suffix := "_" + functionHash + "_" + verificationHash
+	verificationHash := hex.EncodeToString(checkRet)
+	suffix := "_" + verificationHash
 	return prefix + acceptedPrefix + suffix, prefix + rejectedPrefix + suffix
 }
 
+type Instructions struct {
+	InitialCommit   bool
+	ChainId         uint64
+	Ledger          uint64
+	Utxo            uint16
+	AvailableLedger uint64
+	TxId            []byte
+	PaymentHash     []byte
+}
+
+func ParseInstructions(checkRet []byte, availableLedger uint64) Instructions {
+	return Instructions{
+		InitialCommit:   binary.BigEndian.Uint64(checkRet[0:8]) == 1,
+		ChainId:         binary.BigEndian.Uint64(checkRet[8:16]),
+		Ledger:          binary.BigEndian.Uint64(checkRet[16:24]),
+		Utxo:            binary.BigEndian.Uint16(checkRet[30:32]),
+		AvailableLedger: availableLedger,
+		TxId:            checkRet[32:64],
+		PaymentHash:     checkRet[64:96],
+	}
+}
+
 // Verify proof against underlying chain
-func StateConnectorCall(sender common.Address, blockTime *big.Int, functionSelector []byte, checkRet []byte) bool {
-	if binary.BigEndian.Uint64(checkRet[88:96]) > 0 {
+func StateConnectorCall(blockTime *big.Int, checkRet []byte, availableLedger uint64) bool {
+	if len(checkRet) != 96 {
+		return false
+	}
+	instructions := ParseInstructions(checkRet, availableLedger)
+	if instructions.InitialCommit {
 		go func() {
-			acceptedPath, rejectedPath := GetVerificationPaths(functionSelector, checkRet)
+			acceptedPath, rejectedPath := GetVerificationPaths(checkRet[8:])
 			_, errACCEPTED := os.Stat(acceptedPath)
-			_, errREJECTED := os.Stat(rejectedPath)
-			if errACCEPTED != nil && errREJECTED != nil {
-				if ReadChain(sender, blockTime, functionSelector, checkRet) {
+			if errACCEPTED != nil {
+				if ReadChainWithRetries(blockTime, instructions) {
 					verificationHashStore, err := os.Create(acceptedPath)
 					verificationHashStore.Close()
 					if err != nil {
@@ -701,7 +554,7 @@ func StateConnectorCall(sender common.Address, blockTime *big.Int, functionSelec
 		}()
 		return true
 	} else {
-		acceptedPath, rejectedPath := GetVerificationPaths(functionSelector, checkRet)
+		acceptedPath, rejectedPath := GetVerificationPaths(checkRet[8:])
 		_, errACCEPTED := os.Stat(acceptedPath)
 		_, errREJECTED := os.Stat(rejectedPath)
 		if errACCEPTED != nil && errREJECTED != nil {
@@ -714,18 +567,6 @@ func StateConnectorCall(sender common.Address, blockTime *big.Int, functionSelec
 				time.Sleep(apiRetryDelay)
 			}
 		}
-		go func() {
-			removeFulfilledAPIRequests := os.Getenv("REMOVE_FULFILLED_API_REQUESTS")
-			if removeFulfilledAPIRequests == "1" {
-				errDeleteACCEPTED := os.Remove(acceptedPath)
-				errDeleteREJECTED := os.Remove(rejectedPath)
-				if errDeleteACCEPTED != nil && errDeleteREJECTED != nil {
-					// Permissions problem
-					panic(errDeleteACCEPTED)
-					panic(errDeleteREJECTED)
-				}
-			}
-		}()
 		return errACCEPTED == nil
 	}
 }

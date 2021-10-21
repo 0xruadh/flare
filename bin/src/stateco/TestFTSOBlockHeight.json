@@ -1,0 +1,891 @@
+{
+    "contractName": "TestFTSOBlockHeight",
+    "abi": [
+        {
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "",
+                    "type": "uint64"
+                }
+            ],
+            "name": "chainHeight",
+            "outputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "",
+                    "type": "uint64"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "chainId",
+                    "type": "uint64"
+                }
+            ],
+            "name": "getBlockHeight",
+            "outputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "ledgerNum",
+                    "type": "uint64"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint64",
+                    "name": "chainId",
+                    "type": "uint64"
+                },
+                {
+                    "internalType": "uint64",
+                    "name": "ledgerNum",
+                    "type": "uint64"
+                }
+            ],
+            "name": "setBlockHeight",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "testerAddress",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"name\":\"chainHeight\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"chainId\",\"type\":\"uint64\"}],\"name\":\"getBlockHeight\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"ledgerNum\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"chainId\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"ledgerNum\",\"type\":\"uint64\"}],\"name\":\"setBlockHeight\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"testerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/my-usern/flare/src/stateco/TestFTSOBlockHeight.sol\":\"TestFTSOBlockHeight\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/my-usern/flare/src/stateco/TestFTSOBlockHeight.sol\":{\"keccak256\":\"0x82c1846a31a8ed748f86a6f5c8a36879696e1b5b97afa5b736f823ab2d83fce2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b88ecdcdf0a58d1a24212e562d94efd8c3f641f223036fa9c1795c8dfc25347d\",\"dweb:/ipfs/QmVriQ8cwwZ2GstMbmByHRfyBAef6FLc5j49D9BChNhfB4\"]}},\"version\":1}",
+    "bytecode": "608060405234801561001057600080fd5b50600080546001600160a01b0319163317905561029d806100326000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806335932ad41461005157806364e813a214610095578063cec9561b146100b9578063d6a6d5f1146100e0575b600080fd5b6100786004803603602081101561006757600080fd5b503567ffffffffffffffff16610111565b6040805167ffffffffffffffff9092168252519081900360200190f35b61009d610130565b604080516001600160a01b039092168252519081900360200190f35b610078600480360360208110156100cf57600080fd5b503567ffffffffffffffff1661013f565b61010f600480360360408110156100f657600080fd5b5067ffffffffffffffff8135811691602001351661015b565b005b67ffffffffffffffff9081166000908152600160205260409020541690565b6000546001600160a01b031681565b60016020526000908152604090205467ffffffffffffffff1681565b6000546001600160a01b031633146101ba576040805162461bcd60e51b815260206004820152601b60248201527f6d73672e73656e64657220213d20746573746572416464726573730000000000604482015290519081900360640190fd5b67ffffffffffffffff8083166000908152600160205260409020548116908216116102165760405162461bcd60e51b81526004018080602001828103825260218152602001806102476021913960400191505060405180910390fd5b67ffffffffffffffff9182166000908152600160205260409020805467ffffffffffffffff19169190921617905556fe6c65646765724e756d203c3d20636861696e4865696768745b636861696e49645da2646970667358221220ff3bf57a7632ff8860be4f83d87d5d5df926901aa52dddc750b3007e4a4a785a64736f6c63430007060033",
+    "deployedBytecode": "608060405234801561001057600080fd5b506004361061004c5760003560e01c806335932ad41461005157806364e813a214610095578063cec9561b146100b9578063d6a6d5f1146100e0575b600080fd5b6100786004803603602081101561006757600080fd5b503567ffffffffffffffff16610111565b6040805167ffffffffffffffff9092168252519081900360200190f35b61009d610130565b604080516001600160a01b039092168252519081900360200190f35b610078600480360360208110156100cf57600080fd5b503567ffffffffffffffff1661013f565b61010f600480360360408110156100f657600080fd5b5067ffffffffffffffff8135811691602001351661015b565b005b67ffffffffffffffff9081166000908152600160205260409020541690565b6000546001600160a01b031681565b60016020526000908152604090205467ffffffffffffffff1681565b6000546001600160a01b031633146101ba576040805162461bcd60e51b815260206004820152601b60248201527f6d73672e73656e64657220213d20746573746572416464726573730000000000604482015290519081900360640190fd5b67ffffffffffffffff8083166000908152600160205260409020548116908216116102165760405162461bcd60e51b81526004018080602001828103825260218152602001806102476021913960400191505060405180910390fd5b67ffffffffffffffff9182166000908152600160205260409020805467ffffffffffffffff19169190921617905556fe6c65646765724e756d203c3d20636861696e4865696768745b636861696e49645da2646970667358221220ff3bf57a7632ff8860be4f83d87d5d5df926901aa52dddc750b3007e4a4a785a64736f6c63430007060033",
+    "sourceMap": "167:675:0:-:0;;;417:57;;;;;;;;;-1:-1:-1;441:13:0;:26;;-1:-1:-1;;;;;;441:26:0;457:10;441:26;;;167:675;;;;;;",
+    "deployedSourceMap": "167:675:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;710:125;;;;;;;;;;;;;;;;-1:-1:-1;710:125:0;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;203:28;;;:::i;:::-;;;;-1:-1:-1;;;;;203:28:0;;;;;;;;;;;;;;238:44;;;;;;;;;;;;;;;;-1:-1:-1;238:44:0;;;;:::i;480:220::-;;;;;;;;;;;;;;;;-1:-1:-1;480:220:0;;;;;;;;;;;:::i;:::-;;710:125;808:20;;;;773:16;808:20;;;:11;:20;;;;;;;;710:125::o;203:28::-;;;-1:-1:-1;;;;;203:28:0;;:::o;238:44::-;;;;;;;;;;;;;;;:::o;480:220::-;348:13;;-1:-1:-1;;;;;348:13:0;334:10;:27;326:67;;;;;-1:-1:-1;;;326:67:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;593:20:::1;::::0;;::::1;;::::0;;;:11:::1;:20;::::0;;;;;;::::1;581:32:::0;;::::1;;573:78;;;;-1:-1:-1::0;;;573:78:0::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;661:20;::::0;;::::1;;::::0;;;:11:::1;:20;::::0;;;;:32;;-1:-1:-1;;661:32:0::1;::::0;;;::::1;;::::0;;480:220::o",
+    "sourcePath": "/home/my-usern/flare/src/stateco/TestFTSOBlockHeight.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.7.6+commit.7338295f"
+    },
+    "ast": {
+        "absolutePath": "/home/my-usern/flare/src/stateco/TestFTSOBlockHeight.sol",
+        "exportedSymbols": {
+            "TestFTSOBlockHeight": [
+                66
+            ]
+        },
+        "id": 67,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "0.7",
+                    ".6"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "143:22:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 66,
+                "linearizedBaseContracts": [
+                    66
+                ],
+                "name": "TestFTSOBlockHeight",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "functionSelector": "64e813a2",
+                        "id": 3,
+                        "mutability": "mutable",
+                        "name": "testerAddress",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 66,
+                        "src": "203:28:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                        },
+                        "typeName": {
+                            "id": 2,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "203:7:0",
+                            "stateMutability": "nonpayable",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                            }
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "constant": false,
+                        "functionSelector": "cec9561b",
+                        "id": 7,
+                        "mutability": "mutable",
+                        "name": "chainHeight",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 66,
+                        "src": "238:44:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                            "typeString": "mapping(uint64 => uint64)"
+                        },
+                        "typeName": {
+                            "id": 6,
+                            "keyType": {
+                                "id": 4,
+                                "name": "uint64",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "246:6:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint64",
+                                    "typeString": "uint64"
+                                }
+                            },
+                            "nodeType": "Mapping",
+                            "src": "238:25:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                "typeString": "mapping(uint64 => uint64)"
+                            },
+                            "valueType": {
+                                "id": 5,
+                                "name": "uint64",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "256:6:0",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint64",
+                                    "typeString": "uint64"
+                                }
+                            }
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 18,
+                            "nodeType": "Block",
+                            "src": "316:95:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "commonType": {
+                                                    "typeIdentifier": "t_address",
+                                                    "typeString": "address"
+                                                },
+                                                "id": 13,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "leftExpression": {
+                                                    "expression": {
+                                                        "id": 10,
+                                                        "name": "msg",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 4294967281,
+                                                        "src": "334:3:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_magic_message",
+                                                            "typeString": "msg"
+                                                        }
+                                                    },
+                                                    "id": 11,
+                                                    "isConstant": false,
+                                                    "isLValue": false,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "memberName": "sender",
+                                                    "nodeType": "MemberAccess",
+                                                    "src": "334:10:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address_payable",
+                                                        "typeString": "address payable"
+                                                    }
+                                                },
+                                                "nodeType": "BinaryOperation",
+                                                "operator": "==",
+                                                "rightExpression": {
+                                                    "id": 12,
+                                                    "name": "testerAddress",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 3,
+                                                    "src": "348:13:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_address",
+                                                        "typeString": "address"
+                                                    }
+                                                },
+                                                "src": "334:27:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            {
+                                                "hexValue": "6d73672e73656e64657220213d2074657374657241646472657373",
+                                                "id": 14,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "string",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "363:29:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_stringliteral_7a04747e9250ebac8d1154c53b00b203f7c72a25f1571d3c4a22219101b21e2e",
+                                                    "typeString": "literal_string \"msg.sender != testerAddress\""
+                                                },
+                                                "value": "msg.sender != testerAddress"
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_stringliteral_7a04747e9250ebac8d1154c53b00b203f7c72a25f1571d3c4a22219101b21e2e",
+                                                    "typeString": "literal_string \"msg.sender != testerAddress\""
+                                                }
+                                            ],
+                                            "id": 9,
+                                            "name": "require",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [
+                                                4294967278,
+                                                4294967278
+                                            ],
+                                            "referencedDeclaration": 4294967278,
+                                            "src": "326:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                                                "typeString": "function (bool,string memory) pure"
+                                            }
+                                        },
+                                        "id": 15,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "326:67:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 16,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "326:67:0"
+                                },
+                                {
+                                    "id": 17,
+                                    "nodeType": "PlaceholderStatement",
+                                    "src": "403:1:0"
+                                }
+                            ]
+                        },
+                        "id": 19,
+                        "name": "isTesterAddress",
+                        "nodeType": "ModifierDefinition",
+                        "parameters": {
+                            "id": 8,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "313:2:0"
+                        },
+                        "src": "289:122:0",
+                        "virtual": false,
+                        "visibility": "internal"
+                    },
+                    {
+                        "body": {
+                            "id": 27,
+                            "nodeType": "Block",
+                            "src": "431:43:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "id": 25,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 22,
+                                            "name": "testerAddress",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 3,
+                                            "src": "441:13:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address",
+                                                "typeString": "address"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "expression": {
+                                                "id": 23,
+                                                "name": "msg",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 4294967281,
+                                                "src": "457:3:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_magic_message",
+                                                    "typeString": "msg"
+                                                }
+                                            },
+                                            "id": 24,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": false,
+                                            "lValueRequested": false,
+                                            "memberName": "sender",
+                                            "nodeType": "MemberAccess",
+                                            "src": "457:10:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_address_payable",
+                                                "typeString": "address payable"
+                                            }
+                                        },
+                                        "src": "441:26:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_address",
+                                            "typeString": "address"
+                                        }
+                                    },
+                                    "id": 26,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "441:26:0"
+                                }
+                            ]
+                        },
+                        "id": 28,
+                        "implemented": true,
+                        "kind": "constructor",
+                        "modifiers": [],
+                        "name": "",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 20,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "428:2:0"
+                        },
+                        "returnParameters": {
+                            "id": 21,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "431:0:0"
+                        },
+                        "scope": 66,
+                        "src": "417:57:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 52,
+                            "nodeType": "Block",
+                            "src": "563:137:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "arguments": [
+                                            {
+                                                "commonType": {
+                                                    "typeIdentifier": "t_uint64",
+                                                    "typeString": "uint64"
+                                                },
+                                                "id": 42,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": false,
+                                                "lValueRequested": false,
+                                                "leftExpression": {
+                                                    "id": 38,
+                                                    "name": "ledgerNum",
+                                                    "nodeType": "Identifier",
+                                                    "overloadedDeclarations": [],
+                                                    "referencedDeclaration": 32,
+                                                    "src": "581:9:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_uint64",
+                                                        "typeString": "uint64"
+                                                    }
+                                                },
+                                                "nodeType": "BinaryOperation",
+                                                "operator": ">",
+                                                "rightExpression": {
+                                                    "baseExpression": {
+                                                        "id": 39,
+                                                        "name": "chainHeight",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 7,
+                                                        "src": "593:11:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                                            "typeString": "mapping(uint64 => uint64)"
+                                                        }
+                                                    },
+                                                    "id": 41,
+                                                    "indexExpression": {
+                                                        "id": 40,
+                                                        "name": "chainId",
+                                                        "nodeType": "Identifier",
+                                                        "overloadedDeclarations": [],
+                                                        "referencedDeclaration": 30,
+                                                        "src": "605:7:0",
+                                                        "typeDescriptions": {
+                                                            "typeIdentifier": "t_uint64",
+                                                            "typeString": "uint64"
+                                                        }
+                                                    },
+                                                    "isConstant": false,
+                                                    "isLValue": true,
+                                                    "isPure": false,
+                                                    "lValueRequested": false,
+                                                    "nodeType": "IndexAccess",
+                                                    "src": "593:20:0",
+                                                    "typeDescriptions": {
+                                                        "typeIdentifier": "t_uint64",
+                                                        "typeString": "uint64"
+                                                    }
+                                                },
+                                                "src": "581:32:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                }
+                                            },
+                                            {
+                                                "hexValue": "6c65646765724e756d203c3d20636861696e4865696768745b636861696e49645d",
+                                                "id": 43,
+                                                "isConstant": false,
+                                                "isLValue": false,
+                                                "isPure": true,
+                                                "kind": "string",
+                                                "lValueRequested": false,
+                                                "nodeType": "Literal",
+                                                "src": "615:35:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_stringliteral_3de3816323a1be7b8728c0ed2bc47066d6eb8128c176b836b06995e232b7b6e3",
+                                                    "typeString": "literal_string \"ledgerNum <= chainHeight[chainId]\""
+                                                },
+                                                "value": "ledgerNum <= chainHeight[chainId]"
+                                            }
+                                        ],
+                                        "expression": {
+                                            "argumentTypes": [
+                                                {
+                                                    "typeIdentifier": "t_bool",
+                                                    "typeString": "bool"
+                                                },
+                                                {
+                                                    "typeIdentifier": "t_stringliteral_3de3816323a1be7b8728c0ed2bc47066d6eb8128c176b836b06995e232b7b6e3",
+                                                    "typeString": "literal_string \"ledgerNum <= chainHeight[chainId]\""
+                                                }
+                                            ],
+                                            "id": 37,
+                                            "name": "require",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [
+                                                4294967278,
+                                                4294967278
+                                            ],
+                                            "referencedDeclaration": 4294967278,
+                                            "src": "573:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                                                "typeString": "function (bool,string memory) pure"
+                                            }
+                                        },
+                                        "id": 44,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "kind": "functionCall",
+                                        "lValueRequested": false,
+                                        "names": [],
+                                        "nodeType": "FunctionCall",
+                                        "src": "573:78:0",
+                                        "tryCall": false,
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_tuple$__$",
+                                            "typeString": "tuple()"
+                                        }
+                                    },
+                                    "id": 45,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "573:78:0"
+                                },
+                                {
+                                    "expression": {
+                                        "id": 50,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "baseExpression": {
+                                                "id": 46,
+                                                "name": "chainHeight",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 7,
+                                                "src": "661:11:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                                    "typeString": "mapping(uint64 => uint64)"
+                                                }
+                                            },
+                                            "id": 48,
+                                            "indexExpression": {
+                                                "id": 47,
+                                                "name": "chainId",
+                                                "nodeType": "Identifier",
+                                                "overloadedDeclarations": [],
+                                                "referencedDeclaration": 30,
+                                                "src": "673:7:0",
+                                                "typeDescriptions": {
+                                                    "typeIdentifier": "t_uint64",
+                                                    "typeString": "uint64"
+                                                }
+                                            },
+                                            "isConstant": false,
+                                            "isLValue": true,
+                                            "isPure": false,
+                                            "lValueRequested": true,
+                                            "nodeType": "IndexAccess",
+                                            "src": "661:20:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint64",
+                                                "typeString": "uint64"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "=",
+                                        "rightHandSide": {
+                                            "id": 49,
+                                            "name": "ledgerNum",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 32,
+                                            "src": "684:9:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint64",
+                                                "typeString": "uint64"
+                                            }
+                                        },
+                                        "src": "661:32:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "id": 51,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "661:32:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "d6a6d5f1",
+                        "id": 53,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [
+                            {
+                                "id": 35,
+                                "modifierName": {
+                                    "id": 34,
+                                    "name": "isTesterAddress",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 19,
+                                    "src": "547:15:0",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_modifier$__$",
+                                        "typeString": "modifier ()"
+                                    }
+                                },
+                                "nodeType": "ModifierInvocation",
+                                "src": "547:15:0"
+                            }
+                        ],
+                        "name": "setBlockHeight",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 33,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 30,
+                                    "mutability": "mutable",
+                                    "name": "chainId",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 53,
+                                    "src": "504:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint64",
+                                        "typeString": "uint64"
+                                    },
+                                    "typeName": {
+                                        "id": 29,
+                                        "name": "uint64",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "504:6:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 32,
+                                    "mutability": "mutable",
+                                    "name": "ledgerNum",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 53,
+                                    "src": "520:16:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint64",
+                                        "typeString": "uint64"
+                                    },
+                                    "typeName": {
+                                        "id": 31,
+                                        "name": "uint64",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "520:6:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "503:34:0"
+                        },
+                        "returnParameters": {
+                            "id": 36,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "563:0:0"
+                        },
+                        "scope": 66,
+                        "src": "480:220:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    },
+                    {
+                        "body": {
+                            "id": 64,
+                            "nodeType": "Block",
+                            "src": "791:44:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "baseExpression": {
+                                            "id": 60,
+                                            "name": "chainHeight",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 7,
+                                            "src": "808:11:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_mapping$_t_uint64_$_t_uint64_$",
+                                                "typeString": "mapping(uint64 => uint64)"
+                                            }
+                                        },
+                                        "id": 62,
+                                        "indexExpression": {
+                                            "id": 61,
+                                            "name": "chainId",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 55,
+                                            "src": "820:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint64",
+                                                "typeString": "uint64"
+                                            }
+                                        },
+                                        "isConstant": false,
+                                        "isLValue": true,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "nodeType": "IndexAccess",
+                                        "src": "808:20:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "functionReturnParameters": 59,
+                                    "id": 63,
+                                    "nodeType": "Return",
+                                    "src": "801:27:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "35932ad4",
+                        "id": 65,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getBlockHeight",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 56,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 55,
+                                    "mutability": "mutable",
+                                    "name": "chainId",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 65,
+                                    "src": "734:14:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint64",
+                                        "typeString": "uint64"
+                                    },
+                                    "typeName": {
+                                        "id": 54,
+                                        "name": "uint64",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "734:6:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "733:16:0"
+                        },
+                        "returnParameters": {
+                            "id": 59,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 58,
+                                    "mutability": "mutable",
+                                    "name": "ledgerNum",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 65,
+                                    "src": "773:16:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint64",
+                                        "typeString": "uint64"
+                                    },
+                                    "typeName": {
+                                        "id": 57,
+                                        "name": "uint64",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "773:6:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint64",
+                                            "typeString": "uint64"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "772:18:0"
+                        },
+                        "scope": 66,
+                        "src": "710:125:0",
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 67,
+                "src": "167:675:0"
+            }
+        ],
+        "src": "143:700:0"
+    },
+    "functionHashes": {
+        "chainHeight(uint64)": "cec9561b",
+        "getBlockHeight(uint64)": "35932ad4",
+        "setBlockHeight(uint64,uint64)": "d6a6d5f1",
+        "testerAddress()": "64e813a2"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "133800",
+            "executionCost": "21012",
+            "totalCost": "154812"
+        },
+        "external": {
+            "chainHeight(uint64)": "1149",
+            "getBlockHeight(uint64)": "1114",
+            "setBlockHeight(uint64,uint64)": "infinite",
+            "testerAddress()": "1037"
+        }
+    }
+}

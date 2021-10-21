@@ -1,0 +1,184 @@
+INFO [10-21|16:17:04] node/node.go#1036: node version is: avalanche/1.5.2
+INFO [10-21|16:17:04] node/node.go#1037: node ID is: NodeID-EkH8wyEshzEQBToAdR7Fexxcj9rrmEEHZ
+INFO [10-21|16:17:04] node/node.go#1038: current database version: v1.4.5
+INFO [10-21|16:17:04] node/node.go#517: initializing API server
+INFO [10-21|16:17:04] api/server/server.go#82: API created with allowed origins: [*]
+INFO [10-21|16:17:04] node/node.go#810: initializing metrics API
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/metrics
+INFO [10-21|16:17:04] node/node.go#777: initializing keystore
+INFO [10-21|16:17:04] node/node.go#788: initializing keystore API
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/keystore
+INFO [10-21|16:17:04] node/node.go#769: initializing SharedMemory
+INFO [10-21|16:17:04] node/node.go#177: this node's IP is set to: "127.0.0.1:9653"
+DEBUG[10-21|16:17:04] network/dialer/dialer.go#50: dialer has outgoing connection limit of 50/second and dial timeout 30s
+INFO [10-21|16:17:04] node/node.go#908: initializing Health API
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/health
+INFO [10-21|16:17:04] node/node.go#563: initializing VM aliases
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/vm/rWhpuQPF1kb72esV2momhMuTYGkEb1oL29pt2EBXWmSy4kxnT
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/vm/jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/vm/mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6/rpc
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/vm/mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6/ws
+INFO [10-21|16:17:04] node/node.go#830: node config:
+{"httpConfig":{"apiConfig":{"authConfig":{"apiRequireAuthToken":false},"indexerConfig":{"indexAPIEnabled":false,"indexAllowIncomplete":false},"ipcConfig":{"ipcAPIEnabled":false,"ipcPath":"/tmp","ipcDefaultChainIDs":null},"adminAPIEnabled":false,"infoAPIEnabled":true,"keystoreAPIEnabled":true,"metricsAPIEnabled":true,"healthAPIEnabled":true},"httpHost":"127.0.0.1","httpPort":9652,"httpsEnabled":false,"httpsKeyFile":"","httpsCertFile":"","apiAllowedOrigins":["*"]},"gossipConfig":{"peerListSize":20,"peerListGossipSize":50,"peerListGossipFreq":60000000000,"consensusGossipFreq":10000000000,"consensusGossipAcceptedFrontierSize":35,"consensusGossipOnAcceptSize":20},"ipConfig":{"ip":{"ip":"127.0.0.1","port":9653},"attemptedNATTraversal":false,"dynamicUpdateDuration":300000000000},"stakingConfig":{"uptimeRequirement":0.6,"minValidatorStake":1000000000,"maxValidatorStake":3000000000000000,"minDelegatorStake":1000000000,"minDelegationFee":20000,"minStakeDuration":86400000000000,"maxStakeDuration":31536000000000000,"stakeMintingPeriod":31536000000000000,"enableStaking":true,"disabledStakingWeight":1,"stakingKeyPath":"/home/my-usern/flare/conf/local/node2/node.key","stakingCertPath":"/home/my-usern/flare/conf/local/node2/node.crt"},"txFeeConfig":{"txFee":1000000,"createAssetTxFee":10000000,"createSubnetTxFee":100000000,"createBlockchainTxFee":100000000},"epochConfig":{"epochFirstTransition":"2020-12-10T14:00:00-05:00","epochDuration":21600000000000},"bootstrapConfig":{"retryBootstrap":true,"retryBootstrapWarnFrequency":50,"bootstrapBeaconConnectionTimeout":60000000000,"bootstrapMultiputMaxContainersSent":2000,"bootstrapMultiputMaxContainersReceived":2000,"bootstrapMaxTimeGetAncestors":50000000,"bootstrapIDs":["5dDZXn99LCkDoEi6t9gTitZuQmhokxQTc"],"bootstrapIPs":[{"ip":"127.0.0.1","port":9651}]},"databaseConfig":{"path":"/home/my-usern/flare/db/local/node2/fuji","name":"rocksdb"},"avaxAssetID":"1S3PSi4VsVpD8iK2vdykuajxVeuCV2xhjPSkQ4K88mqWGozMP","networkID":5,"enableAssertions":true,"enableCrypto":true,"healthCheckFreq":30000000000,"networkConfig":{"healthConfig":{"minConnectedPeers":1,"maxTimeSinceMsgReceived":60000000000,"maxTimeSinceMsgSent":60000000000,"maxPortionSendQueueBytesFull":0.9,"maxSendFailRate":0.9,"maxSendFailRateHalflife":10000000000},"adaptiveTimeoutConfig":{"initialTimeout":5000000000,"minimumTimeout":2000000000,"maximumTimeout":10000000000,"timeoutCoefficient":2,"timeoutHalflife":300000000000},"inboundConnThrottlerConfig":{"allowCooldown":2000000000,"maxRecentConns":1024},"inboundThrottlerConfig":{"vdrAllocSize":33554432,"atLargeAllocSize":33554432,"nodeMaxAtLargeBytes":4194304},"outboundThrottlerConfig":{"vdrAllocSize":33554432,"atLargeAllocSize":33554432,"nodeMaxAtLargeBytes":4194304},"dialerConfig":{"throttleRps":50,"connectionTimeout":30000000000},"compressionEnabled":true,"peerAliasTimeout":600000000000},"benchlistConfig":{"threshold":10,"minimumFailingDuration":300000000000,"duration":1800000000000,"maxPortion":0.06666666666666665,"peerSummaryEnabled":false},"profilerConfig":{"dir":"/home/my-usern/.avalanchego/profiles","enabled":false,"freq":900000000000,"maxNumFiles":5},"loggingConfig":{"rotationInterval":86400000000000,"fileSize":8388608,"rotationSize":7,"flushSize":1,"disableLogging":false,"disableDisplaying":false,"disableContextualDisplaying":false,"disableFlushOnWrite":false,"assertions":false,"logLevel":"DEBUG","displayLevel":"DEBUG","displayHighlight":"PLAIN"},"pluginDir":"/home/my-usern/go/src/github.com/ava-labs/avalanchego/build/plugins","consensusParams":{"k":20,"alpha":16,"betaVirtuous":15,"betaRogue":20,"concurrentRepolls":4,"optimalProcessing":50,"maxOutstandingItems":1024,"maxItemProcessingTime":120000000000,"parents":5,"batchSize":30},"meterVMEnabled":false,"routerHealthConfig":{"maxDropRate":1,"maxDropRateHalflife":10000000000,"maxOutstandingRequests":1024,"maxOutstandingDuration":300000000000,"maxRunTimeRequests":10000000000},"consensusShutdownTimeout":5000000000,"whitelistedSubnets":[],"vmAliases":null}
+INFO [10-21|16:17:04] node/node.go#832: skipping admin API initialization because it has been disabled
+INFO [10-21|16:17:04] node/node.go#879: initializing info API
+INFO [10-21|16:17:04] api/server/server.go#208: adding route /ext/info
+INFO [10-21|16:17:04] node/node.go#963: skipping ipc API initialization because it has been disabled
+INFO [10-21|16:17:04] node/node.go#976: initializing chain aliases
+INFO [10-21|16:17:04] node/node.go#994: initializing API aliases
+INFO [10-21|16:17:04] node/node.go#855: skipping profiler initialization because it has been disabled
+INFO [10-21|16:17:04] node/node.go#503: initializing chains
+INFO [10-21|16:17:04] chains/manager.go#233: creating chain:
+    ID: 11111111111111111111111111111111LpoYY
+    VMID:rWhpuQPF1kb72esV2momhMuTYGkEb1oL29pt2EBXWmSy4kxnT
+DEBUG[10-21|16:17:04] snow/networking/router/chain_router.go#217: registering chain 11111111111111111111111111111111LpoYY with chain router
+DEBUG[10-21|16:17:04] node/node.go#367: initializing API server without TLS
+INFO [10-21|16:17:04] api/server/server.go#114: HTTP API server listening on "127.0.0.1:9652"
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/11111111111111111111111111111111LpoYY
+DEBUG[10-21|16:17:04] network/network.go#1612: connected to 5dDZXn99LCkDoEi6t9gTitZuQmhokxQTc at 127.0.0.1:9651
+INFO [10-21|16:17:04] chains/manager.go#233: creating chain:
+    ID: ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh
+    VMID:mgj786NP7uDwBCcq6YwThhaN8FLyybkCa4zBWTQbNgmK6k9A6
+DEBUG[10-21|16:17:04] snow/networking/router/chain_router.go#217: registering chain ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh with chain router
+INFO [10-21|16:17:04] chains/manager.go#233: creating chain:
+    ID: 7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB
+    VMID:jvYyfQTxGMJLuGWa55kdP2p2zSUYsQ5Raupu4TW34ZAUBAbtq
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh/rpc
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh/avax
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh/ws
+DEBUG[10-21|16:17:04] snow/networking/router/chain_router.go#217: registering chain 7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB with chain router
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB/wallet
+INFO [10-21|16:17:04] api/server/server.go#192: adding route /ext/bc/7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB/events
+DEBUG[10-21|16:17:07] network/network.go#1612: connected to FPAwqHjs8Mw8Cuki5bkm3vSVisZr8t2Lu at 127.0.0.1:9655
+DEBUG[10-21|16:17:10] network/network.go#1612: connected to AQghDJTU3zuQj73itPtfTZz6CxsTQVD3R at 127.0.0.1:9657
+DEBUG[10-21|16:17:10] network/network.go#465: failed to send GetAcceptedFrontier(HaZ4HpanjndqSuN252chFsTysmdND5meA, 7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB, 1)
+DEBUG[10-21|16:17:10] network/network.go#465: failed to send GetAcceptedFrontier(HaZ4HpanjndqSuN252chFsTysmdND5meA, ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh, 1)
+DEBUG[10-21|16:17:13] network/network.go#1612: connected to HaZ4HpanjndqSuN252chFsTysmdND5meA at 127.0.0.1:9659
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run router
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run network
+DEBUG[10-21|16:17:14] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:17:14.027057513-04:00","duration":9398,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:14] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:17:14.027061767-04:00","duration":31673,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:14] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.042532792843653466,"timeSinceLastMsgReceived":"1.027229086s","timeSinceLastMsgSent":"1.027229086s"},"timestamp":"2021-10-21T16:17:14.027057504-04:00","duration":9388,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run P
+DEBUG[10-21|16:17:14] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:17:14.154011343-04:00","duration":20801,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run C
+DEBUG[10-21|16:17:14] health/service.go#95: starting to run X
+DEBUG[10-21|16:17:14] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:17:14.318742718-04:00","duration":9276,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:14] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:17:14.317754595-04:00","duration":759794,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:17:44] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:17:44.027602199-04:00","duration":533,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run router
+DEBUG[10-21|16:17:44] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:17:44.02761605-04:00","duration":6390,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run network
+DEBUG[10-21|16:17:44] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.01265129475989888,"timeSinceLastMsgReceived":"1.027981939s","timeSinceLastMsgSent":"9.027981939s"},"timestamp":"2021-10-21T16:17:44.027642217-04:00","duration":6714,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run P
+DEBUG[10-21|16:17:44] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:17:44.154339262-04:00","duration":17416,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run C
+DEBUG[10-21|16:17:44] health/service.go#95: starting to run X
+DEBUG[10-21|16:17:44] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:17:44.319083273-04:00","duration":10203,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:17:44] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:17:44.319018868-04:00","duration":453229,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run network
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run router
+DEBUG[10-21|16:18:14] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.000522786076111243,"timeSinceLastMsgReceived":"1.027777741s","timeSinceLastMsgSent":"3.027777741s"},"timestamp":"2021-10-21T16:18:14.027660126-04:00","duration":10327,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:18:14.027685033-04:00","duration":5319,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:18:14] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:18:14.027681509-04:00","duration":713,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run P
+DEBUG[10-21|16:18:14] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:18:14.154419678-04:00","duration":16328,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run X
+DEBUG[10-21|16:18:14] health/service.go#95: starting to run C
+DEBUG[10-21|16:18:14] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:18:14.319074616-04:00","duration":11224,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:14] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:18:14.319175928-04:00","duration":448737,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run router
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:18:44] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:18:44.027505538-04:00","duration":795,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run network
+DEBUG[10-21|16:18:44] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:18:44.027509504-04:00","duration":9965,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.000014532397496125757,"timeSinceLastMsgReceived":"1.036341304s","timeSinceLastMsgSent":"1.036341304s"},"timestamp":"2021-10-21T16:18:44.027574378-04:00","duration":8804,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run P
+DEBUG[10-21|16:18:44] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:18:44.154472676-04:00","duration":23620,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run X
+DEBUG[10-21|16:18:44] health/service.go#95: starting to run C
+DEBUG[10-21|16:18:44] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:18:44.319066293-04:00","duration":11200,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:18:44] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:18:44.319092255-04:00","duration":484332,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run router
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:19:14] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:19:14.027589471-04:00","duration":453,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run network
+DEBUG[10-21|16:19:14] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.000010654994087269582,"timeSinceLastMsgReceived":"1.027912852s","timeSinceLastMsgSent":"9.027912852s"},"timestamp":"2021-10-21T16:19:14.027559388-04:00","duration":7993,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:19:14.027593033-04:00","duration":11885,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run P
+DEBUG[10-21|16:19:14] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:19:14.154483232-04:00","duration":18692,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run X
+DEBUG[10-21|16:19:14] health/service.go#95: starting to run C
+DEBUG[10-21|16:19:14] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:19:14.319079546-04:00","duration":15676,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:14] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:19:14.319159612-04:00","duration":624330,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run router
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:19:44] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:19:44.027583846-04:00","duration":8009,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:19:44.027579896-04:00","duration":367,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run network
+DEBUG[10-21|16:19:44] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":0.0000030999806288849034,"timeSinceLastMsgReceived":"1.027895107s","timeSinceLastMsgSent":"3.027895107s"},"timestamp":"2021-10-21T16:19:44.027631459-04:00","duration":8800,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run P
+DEBUG[10-21|16:19:44] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:19:44.154480551-04:00","duration":22291,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run C
+DEBUG[10-21|16:19:44] health/service.go#95: starting to run X
+DEBUG[10-21|16:19:44] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:19:44.31911901-04:00","duration":15613,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:19:44] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:19:44.319088655-04:00","duration":435894,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run router
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run network
+DEBUG[10-21|16:20:14] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:20:14.02762723-04:00","duration":43417,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:20:14.027623379-04:00","duration":528,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":3.0593373634783714e-8,"timeSinceLastMsgReceived":"1.027826414s","timeSinceLastMsgSent":"1.027826414s"},"timestamp":"2021-10-21T16:20:14.027776261-04:00","duration":9369,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run P
+DEBUG[10-21|16:20:14] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:20:14.154459149-04:00","duration":19823,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run X
+DEBUG[10-21|16:20:14] health/service.go#95: starting to run C
+DEBUG[10-21|16:20:14] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:20:14.319064071-04:00","duration":12689,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:14] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:20:14.31913019-04:00","duration":583818,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run router
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:20:44] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:20:44.027493005-04:00","duration":562,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run network
+DEBUG[10-21|16:20:44] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":8.289548382767396e-9,"timeSinceLastMsgReceived":"1.028277042s","timeSinceLastMsgSent":"9.028277042s"},"timestamp":"2021-10-21T16:20:44.02750863-04:00","duration":5139,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:20:44.027496518-04:00","duration":17674,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run P
+DEBUG[10-21|16:20:44] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:20:44.15443382-04:00","duration":29041,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run C
+DEBUG[10-21|16:20:44] health/service.go#95: starting to run X
+DEBUG[10-21|16:20:44] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:20:44.319139722-04:00","duration":9395,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:20:44] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:20:44.319068695-04:00","duration":469893,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run router
+DEBUG[10-21|16:21:14] health/service.go#119: "router" returned healthy with: {"message":{"longestRunningRequest":"0s","outstandingRequests":0},"timestamp":"2021-10-21T16:21:14.027608097-04:00","duration":8759,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run isBootstrapped
+DEBUG[10-21|16:21:14] health/service.go#119: "isBootstrapped" returned healthy with: {"timestamp":"2021-10-21T16:21:14.027604466-04:00","duration":465,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run network
+DEBUG[10-21|16:21:14] health/service.go#119: "network" returned healthy with: {"message":{"connectedPeers":4,"sendFailRate":2.06261848944565e-9,"timeSinceLastMsgReceived":"1.027890897s","timeSinceLastMsgSent":"3.027890897s"},"timestamp":"2021-10-21T16:21:14.027653696-04:00","duration":5796,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run P
+DEBUG[10-21|16:21:14] health/service.go#119: "P" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{"percentConnected":1}},"timestamp":"2021-10-21T16:21:14.154381013-04:00","duration":15548,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run C
+DEBUG[10-21|16:21:14] health/service.go#95: starting to run X
+DEBUG[10-21|16:21:14] health/service.go#119: "X" returned healthy with: {"message":{"consensus":{"longestRunningVertex":"0s","outstandingVertices":0,"snowstorm":{"longestRunningTx":"0s","outstandingTransactions":0}},"vm":null},"timestamp":"2021-10-21T16:21:14.319200132-04:00","duration":13287,"contiguousFailures":0,"timeOfFirstFailure":null}
+DEBUG[10-21|16:21:14] health/service.go#119: "C" returned healthy with: {"message":{"consensus":{"longestRunningBlock":"0s","outstandingBlocks":0},"vm":{}},"timestamp":"2021-10-21T16:21:14.319100308-04:00","duration":650886,"contiguousFailures":0,"timeOfFirstFailure":null}
+INFO [10-21|16:21:21] node/node.go#1127: shutting down node with exit code 0
+INFO [10-21|16:21:21] ipcs/chainipc.go#101: shutting down chain IPCs
+INFO [10-21|16:21:21] chains/manager.go#747: shutting down chain manager
+INFO [10-21|16:21:21] snow/networking/router/chain_router.go#182: shutting down chain router
+DEBUG[10-21|16:21:21] snow/networking/router/chain_router.go#235: can't remove unknown chain 7xKYhEvYuUekwDxozgEiMPufzJ3jJPypKbGE8ny6KL84z4RKB
+DEBUG[10-21|16:21:21] snow/networking/router/chain_router.go#235: can't remove unknown chain 11111111111111111111111111111111LpoYY
+DEBUG[10-21|16:21:21] network/peer.go#516: closing connection to NodeID-5dDZXn99LCkDoEi6t9gTitZuQmhokxQTc at 127.0.0.1:9651 resulted in an error: write tcp 127.0.0.1:59386->127.0.0.1:9651: write: connection reset by peer
+DEBUG[10-21|16:21:21] network/network.go#1633: disconnected from 5dDZXn99LCkDoEi6t9gTitZuQmhokxQTc at 127.0.0.1:9651
+DEBUG[10-21|16:21:21] snow/networking/router/chain_router.go#235: can't remove unknown chain ZMzizkCtTWcNFzzjvoacStQ7ZGqR4Hye4tow5Xdb6UosoLcQh
+INFO [10-21|16:21:21] network/network.go#1064: shutting down network
+DEBUG[10-21|16:21:21] network/network.go#972: error during server accept: accept tcp [::]:9653: use of closed network connection
+DEBUG[10-21|16:21:21] network/network.go#1633: disconnected from HaZ4HpanjndqSuN252chFsTysmdND5meA at 127.0.0.1:9659
+DEBUG[10-21|16:21:21] network/network.go#1633: disconnected from FPAwqHjs8Mw8Cuki5bkm3vSVisZr8t2Lu at 127.0.0.1:9655
+DEBUG[10-21|16:21:21] network/peer.go#516: closing connection to NodeID-AQghDJTU3zuQj73itPtfTZz6CxsTQVD3R at 127.0.0.1:9657 resulted in an error: write tcp 127.0.0.1:9653->127.0.0.1:50278: write: connection reset by peer
+DEBUG[10-21|16:21:21] network/network.go#1633: disconnected from AQghDJTU3zuQj73itPtfTZz6CxsTQVD3R at 127.0.0.1:9657
+INFO [10-21|16:21:22] node/node.go#1151: cleaning up plugin subprocesses
+INFO [10-21|16:21:22] node/node.go#1154: finished node shutdown
+DEBUG[10-21|16:21:22] app/process/process.go#174: node dispatch returned: accept tcp [::]:9653: use of closed network connection
+INFO [10-21|16:21:22] nat/nat.go#152: Unmapped all ports
